@@ -1280,21 +1280,9 @@
     },
     {
       "id": "10c2bf03-1c59-42d9-8ddc-82c1c3da5597",
-      "name": "Abbie Schaefer",
-      "email": "Abbie_Schaefer45@gmail.com",
-      "profilePicture": "https://avatars.githubusercontent.com/u/10508248",
-      "phone": "842.981.5853 x4664",
-      "address": {
-        "street": "186 S Railroad Street",
-        "city": "East Assunta",
-        "state": "Illinois",
-        "zip": "05069",
-        "coordinates": {
-          "lat": "-66.4301",
-          "lon": "-62.5583"
-        }
-      },
-      "age": 42
+      "name": "Abbie Schaeferasd",
+      "phone": "842 999 999 99 99",
+      "email": "Abbie_Schaefer45@gmail.com"
     },
     {
       "id": "451d6cc8-9f1f-4352-a5c7-39e14e6fd46f",
@@ -1799,36 +1787,6 @@
         }
       },
       "age": 44
-    },
-    {
-      "id": "1734089571152",
-      "name": "sdaf",
-      "phone": "999 999 99 99 987",
-      "email": "asdf@gmail.com"
-    },
-    {
-      "id": "11",
-      "name": "sadf",
-      "phone": "999 999 999 99 99",
-      "email": "sadf@gmail.com"
-    },
-    {
-      "id": "21",
-      "name": "as",
-      "phone": "123 123 123 22 22",
-      "email": "sad@ga.co"
-    },
-    {
-      "id": "1734094144501",
-      "name": "as",
-      "phone": "123 123 123 33 33",
-      "email": "sadf@gmai.co"
-    },
-    {
-      "id": "1734099169280",
-      "name": "asdf",
-      "phone": "+7 999 999 99-99",
-      "email": "asdf@gmail.com"
     }
   ]
 }

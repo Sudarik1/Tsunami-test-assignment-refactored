@@ -74,7 +74,7 @@ const handleSubmit = async () => {
   @include alignColumn();
 
   width: 40%;
-  margin: 10% 25%;
+  margin: 10% 30%;
 
   color: #2D2A42;
 
@@ -109,7 +109,7 @@ const handleSubmit = async () => {
     &__btn {
       align-self: start;
 
-      width: 50%;
+      width: 40%;
 
       font-size: 1em;
       font-weight: 550;
