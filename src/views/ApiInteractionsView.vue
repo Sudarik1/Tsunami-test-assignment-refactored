@@ -4,25 +4,27 @@
     <form class="form" @submit.prevent="handleSubmit">
       <label class="form__label">Имя <span class="form--asterisk-blue">*</span></label>
       <input 
+      type="text"
+      ref="nameInput"
       class="form__input" 
       v-model="editContact.name" 
-      placeholder="Иванов Иван Иванович" 
+      placeholder="Иванов Иван Иванович"
       required 
-      pattern="^[a-zA-Zа-яА-ЯёЁ\s'\-]+$"
       />
       <label class="form__label">Email <span class="form--asterisk-blue">*</span></label>
-      <input class="form__input" 
+      <input class="form__input"
+      type="text"
+      ref="emailInput" 
       v-model="editContact.email" 
-      placeholder="example@mail.com" 
+      placeholder="example@mail.com"
       required
-      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
       />
       <label class="form__label">Телефон <span class="form--asterisk-blue">*</span></label>
       <input class="form__input" 
+      type="text"
+      ref="phoneInput"
       v-model="editContact.phone" 
-      placeholder="+7 999 999-99-99" 
       required
-      pattern="^\+?[0-9\s\-\(\)]{7,17}$"
       />
       <button class="form__btn" type="submit">{{ isEdit ? 'ИЗМЕНИТЬ КОНТАКТ' : 'ДОБАВИТЬ КОНТАКТ' }}</button>
     </form>
@@ -34,6 +36,7 @@
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useGlobalState } from '../stores/GlobalState';
+import IMask from 'imask';
 
 import type { ContactInterface } from '@/types/ContactInterface.ts'
 
@@ -43,8 +46,37 @@ const globalState = useGlobalState();
 
 const isEdit = route.params.id !== undefined || route.path === '/edit/';
 const editContact = ref({ name: '', phone: '', email: '', id: ''});
+const nameInput = ref<HTMLInputElement | null>(null);
+const emailInput = ref<HTMLInputElement | null>(null);
+const phoneInput = ref<HTMLInputElement | null>(null);
+
+const nameMaskOptions = {
+  mask: /^[a-zA-Zа-яА-ЯёЁ\s'-]*$/, 
+  lazy: false,
+};
+
+const emailMaskOptions = {
+  mask: /^[a-zA-Zа-яА-ЯёЁ1-9@.\s'-]*$/,
+  lazy: false,
+};
+
+
+const phoneMaskOptions = {
+  mask: '+{7} (000) 000-00-00',
+  lazy: false,
+  placeholderChar: '9'
+};
 
 onMounted(() => {
+  if (nameInput.value) {
+    IMask(nameInput.value, nameMaskOptions);
+  }
+  if (emailInput.value) {
+    IMask(emailInput.value, emailMaskOptions);
+  }
+  if (phoneInput.value) {
+    IMask(phoneInput.value, phoneMaskOptions);
+  }
   if (isEdit) {
     const existingContact = globalState.contacts.find((contact: ContactInterface) => contact.id === String(route.params.id));
     if (existingContact) {
