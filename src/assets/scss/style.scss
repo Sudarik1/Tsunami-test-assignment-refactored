@@ -1,7 +1,7 @@
-@import 'config';
+@use 'config';
 
 @font-face {
-    font-family: $secondary-font-family;
+    font-family: config.$secondary-font-family;
     src: url(../fonts/ReneBiederMilliardBook.otf);
 }
 
@@ -12,7 +12,7 @@ body{
     margin: 0;
     
     text-align: left;
-    color: $primary-color;
+    color: config.$primary-color;
 }
   
 button{

@@ -10,6 +10,7 @@
       v-model="editContact.name" 
       placeholder="Иванов Иван Иванович"
       required 
+      @click="updateMaskHandler"
       />
       <label class="form__label">Email <span class="form--asterisk-blue">*</span></label>
       <input class="form__input"
@@ -18,6 +19,7 @@
       v-model="editContact.email" 
       placeholder="example@mail.com"
       required
+      @click="updateMaskHandler"
       />
       <label class="form__label">Телефон <span class="form--asterisk-blue">*</span></label>
       <input class="form__input" 
@@ -25,6 +27,7 @@
       ref="phoneInput"
       v-model="editContact.phone" 
       required
+      @click="updateMaskHandler"
       />
       <button class="form__btn" type="submit">{{ isEdit ? 'ИЗМЕНИТЬ КОНТАКТ' : 'ДОБАВИТЬ КОНТАКТ' }}</button>
     </form>
@@ -50,13 +53,14 @@ const nameInput = ref<HTMLInputElement | null>(null);
 const emailInput = ref<HTMLInputElement | null>(null);
 const phoneInput = ref<HTMLInputElement | null>(null);
 
+
 const nameMaskOptions = {
   mask: /^[a-zA-Zа-яА-ЯёЁ\s'-]*$/, 
   lazy: false,
 };
 
 const emailMaskOptions = {
-  mask: /^[a-zA-Zа-яА-ЯёЁ1-9@.\s'-]*$/,
+  mask: /^[a-zA-Zа-яА-ЯёЁ0-9@.\s'-]*$/,
   lazy: false,
 };
 
@@ -85,6 +89,21 @@ onMounted(() => {
   }
 });
 
+const updateMaskHandler = () => {
+  if (nameInput.value){
+    const maskName = IMask(nameInput.value, nameMaskOptions)
+    maskName.updateValue()
+  }
+  if (emailInput.value){
+    const maskEmail = IMask(emailInput.value, emailMaskOptions)
+    maskEmail.updateValue()
+  }
+  if (phoneInput.value){
+    const maskPhone = IMask(phoneInput.value, phoneMaskOptions)
+    maskPhone.updateValue()
+  }
+}
+
 const handleSubmit = async () => {
   if (isEdit) {
     await globalState.updateContact(editContact.value);
@@ -96,7 +115,8 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/scss/_config.scss';
+@use '../assets/scss/config';
+
 @mixin alignColumn(){
   display: flex;
   flex-direction: column;
@@ -119,23 +139,23 @@ const handleSubmit = async () => {
     @include alignColumn();
 
     &__label {
+      font-family: config.$secondary-font-family;
       font-weight: 700;
       margin: 15px 0 5px 0;
     }
 
     &--asterisk-blue {
-      color: $primary-color;
-      font-family: $secondary-font-family;
+      color: config.$primary-color;
     }
 
     &__input {
+      font-family: config.$secondary-font-family;
+
       color: #878499;
       border: 1px solid #EEECF4;
       border-radius: 10px;
 
       padding: 15px;
-
-      font-family: $secondary-font-family;
     }
 
     &__btn {
@@ -153,7 +173,12 @@ const handleSubmit = async () => {
       border-radius: 50px;
 
       color: #FFFFFF;
-      background-color: $primary-color;
+
+      background-color: config.$primary-color;
+    }
+
+    &__btn:hover {
+      cursor: pointer;
     }
   }
 }

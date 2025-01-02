@@ -7,7 +7,7 @@
     <table class="contacts-table" v-if="!globalState.isLoading">
       <thead>
         <tr>
-          <th @click="globalState.toggleSortOrder">
+          <th class="contacts-table--sort-btn" @click="globalState.toggleSortOrder">
             Имя
             <span>{{ globalState.sortOrder === 'asc' ? '↑' : '↓' }}</span>
           </th>
@@ -55,7 +55,7 @@ const editContactHandler = (id: string) => {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/scss/_config.scss';
+@use '../assets/scss/config';
 $text-gray: #7D7B8E;
 
 .content {
@@ -88,11 +88,13 @@ $text-gray: #7D7B8E;
 }
 
 .contacts-table {
+  font-family: config.$secondary-font-family;
+
   width: 100%;
   margin-top: 20px;
   border-collapse: collapse;
 
-  font-family: $secondary-font-family;
+  color: config.$primary-color;
 
   th {
     font-size: 1.25em;
@@ -111,7 +113,7 @@ $text-gray: #7D7B8E;
     }
   }
 
-  &__sort-btn {
+  &--sort-btn {
     cursor: pointer;
   }
 }
